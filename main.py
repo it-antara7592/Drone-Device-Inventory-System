@@ -311,9 +311,8 @@ def main():
         else:
             print("Incorrect Choice, Try Again!")
 
-
+#Driver Code
 if __name__=="__main__":
     main()
-# Driver Code
-# #create_dronerecord()
-# read_dronerecord()
+
+

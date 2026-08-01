@@ -75,11 +75,11 @@ def search_dronedata():
         finddata=input("Enter your choice(1-11):")
         if finddata=='1':
             data=input("Enter the Drone ID:").upper()
-            dronerec=collection.find({"droneId":data})
-            drone_count=collection.count_documents({"droneId":data})
-            if drone_count>0:
+            dronerec=collection.find_one({"droneId":data})
+            if dronerec is not None:
                 print("This Drone Id Exits!")
-                print_dronedata(dronerec)
+                print("Drone Data:-")
+                print(dronerec)
             else:
                 print("This Drone Id does not Exists")
                 
@@ -105,11 +105,11 @@ def search_dronedata():
 
         elif finddata=='4':
             data=input("Enter the Serial Number:").upper()
-            dronerec=collection.find({"serialNumber":data})
-            drone_count=collection.count_documents({"serialNumber":data})
-            if drone_count>0:
+            dronerec=collection.find_one({"serialNumber":data})
+            if dronerec is not None:
                 print("This Serial Number Exits!")
-                print_dronedata(dronerec)
+                print("Drone Data:-")
+                print(dronerec)
             else:
                 print("This Serial Number does not Exists")
             

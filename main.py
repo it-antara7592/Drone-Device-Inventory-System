@@ -20,10 +20,10 @@ def create_dronerecord():
                 break
             else:
                 print("Entered value is not accepted, Try Again!") 
-        purchaseDate=input("Enter the Drone Purchase Date:")
+        purchaseDate=input("Enter the Drone Purchase Date(YYYY-MM-DD):")
         location=input("Enter the Drone Location:")
         assignedOperator=input("Enter the Assigned Operator of the Drone :")
-        maintenanceDate=input("Enter the Drone Maintenance Date:")
+        maintenanceDate=input("Enter the Drone Maintenance Date(YYYY-MM-DD):")
         while True:
             conditionStatus=input("Enter the Drone Current Condition(Working/ Repair /Obsolete):").capitalize()
             if conditionStatus=='Working':
@@ -134,7 +134,7 @@ def search_dronedata():
                 print("This Status Value does not Exists")
             
         elif finddata=='7':
-            data=input("Enter the Purchase Date:")
+            data=input("Enter the Purchase Date(YYYY-MM-DD):")
             dronerec=collection.find({"purchaseDate":data})
             drone_count=collection.count_documents({"purchaseDate":data})
             if drone_count>0:
@@ -164,7 +164,7 @@ def search_dronedata():
                 print("This Assigned Operator does not Exists")
 
         elif finddata=='10':
-            data=input("Enter the Maintenance Date:")
+            data=input("Enter the Maintenance Date(YYYY-MM-DD):")
             dronerec=collection.find({"maintenanceDate":data})
             drone_count=collection.count_documents({"maintenanceDate":data})
             if drone_count>0:
@@ -224,7 +224,7 @@ def update_dronedata():
                 collection.update_one({"droneId":droneId},{"$set":{"assignedOperator":data}})
                 print(f"Assigned Operator of {droneId} Updated Successfully.")
             elif update=='4':
-                data=input("Enter the updated Maintenance Date in(yyyy-mm-dd format): ")
+                data=input("Enter the updated Maintenance Date in(YYYY-MM-DD): ")
                 collection.update_one({"droneId":droneId},{"$set":{"maintenanceDate":data}})
                 print(f"Maintenance Data of {droneId} Updated Successfully.")
             elif update=='5':
@@ -269,13 +269,17 @@ def delete_droneallrecords():
 
 def delete_droneconditionobsolete():
     try:
-        choice=input("Do you want to delete the data of all drones whose condition is obsolete: ").lower()
-        if choice=='yes':
-            collection.delete_many({"conditionStatus":"Obsolete"})
-            print("All Drone Data with Obsolete Condition Are Successfully Deleted")
-
-        else:
-            print("No Drone Data is Deleted")
+        while True:
+            choice=input("Do you want to delete the data of all drones whose condition is obsolete(yes/no): ").lower()
+            if choice=='yes':
+                collection.delete_many({"conditionStatus":"Obsolete"})
+                print("All Drone Data with Obsolete Condition Are Successfully Deleted")
+                break
+            elif choice=='no':
+                print("No Drone Data is Deleted")
+                break
+            else: 
+                print("Entered value is incorrect, Try Again!")
     except Exception as k:
         print(str(k))
 
